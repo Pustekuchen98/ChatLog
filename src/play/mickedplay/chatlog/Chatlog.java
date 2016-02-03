@@ -7,7 +7,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Chatlog extends JavaPlugin {
 
-    // Commit me
     public void onLoad() {
 
     }
