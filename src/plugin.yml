@@ -4,4 +4,4 @@ author: mickedplay
 version: 0.0.1
 commands:
   chatlog:
-    description: Chatlog
+    description: Chatlog Befehl
