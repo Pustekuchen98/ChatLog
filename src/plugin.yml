@@ -1,0 +1,7 @@
+main: play.mickedplay.chatlog.Chatlog
+name: Chatlog
+author: mickedplay
+version: 0.0.1
+commands:
+  chatlog:
+    description:
