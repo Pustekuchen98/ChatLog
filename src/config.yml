@@ -1,0 +1,13 @@
+MySQL:
+  hostname: 127.0.0.1
+  port: 3306
+  database: database
+  username: username
+  password: password
+serverName: My awesome server
+websiteURL: http://example.com/ ##urls will look like this: http://example.com/?log=uglise59
+logKeyLength: 8 ##key length
+
+prefix: '&2[&6Chatlog&2]&7 '
+language: 'de' ##en, de
+allowSavingWhileRuntime: true ##not implemented yet!
