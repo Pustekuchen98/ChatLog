@@ -1,13 +1,16 @@
 MySQL:
-  hostname: 127.0.0.1
-  port: 3306
-  database: database
-  username: username
-  password: password
-serverName: My awesome server
-websiteURL: http://example.com/ ##urls will look like this: http://example.com/?log=uglise59
-logKeyLength: 8 ##key length
+  hostname:
+  port:
+  database:
+  username:
+  password:
 
-prefix: '&2[&6Chatlog&2]&7 '
-language: 'de' ##en, de
-allowSavingWhileRuntime: true ##not implemented yet!
+archiveType: 'INSTANT' # INSTANT, ONSTOP
+parameterLength: 8
+baseUrl: http://example.com/
+serverName: A Minecraft Server
+
+prefix: '&6Chatlog &7\u00BB &e'
+
+language: 'ENGLISH' # Not implemented yet
+mergeInterval: 0    # Not implemented yet

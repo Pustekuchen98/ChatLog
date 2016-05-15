@@ -1,90 +1,71 @@
 package play.mickedplay.chatlog;
 
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-
-import java.util.ArrayList;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.bukkit.ChatColor;
+import play.mickedplay.chatlog.database.ArchiveType;
 
 /**
  * Created by Privat on 05.02.2016 at 22:20.
  */
 public class ConfigSettings {
 
-    private Chatlog chatlog;
-    private FileConfiguration config;
-    private boolean settingsValid;
+    private String hostname, database, username, password;
+    private int port;
+    private int parameterLength;
+    private String baseUrl, serverName;
 
-    private String websiteURL;
-    private String serverName;
-    private int logKeyLength;
-    private String language;
-    private boolean isGamemodus;
+    private ArchiveType archiveType;
 
-    public ConfigSettings(Chatlog chatlog) {
-        this.chatlog = chatlog;
-        this.config = chatlog.getConfig();
-        this.chatlog.getConfig().options().copyDefaults(true);
-        this.chatlog.saveDefaultConfig();
-        this.retrieveConfigSettings();
-        this.checkValues();
+    public ConfigSettings(ConfigManager configManager) {
+        this.hostname = configManager.getConfigFile().getString("MySQL.hostname");
+        this.database = configManager.getConfigFile().getString("MySQL.database");
+        this.username = configManager.getConfigFile().getString("MySQL.username");
+        this.password = configManager.getConfigFile().getString("MySQL.password");
+        this.port = configManager.getConfigFile().getInt("MySQL.port");
+
+        this.parameterLength = configManager.getConfigFile().getInt("parameterLength");
+        this.baseUrl = configManager.getConfigFile().getString("baseUrl");
+        this.serverName = configManager.getConfigFile().getString("serverName");
+
+        this.archiveType = ArchiveType.valueOf(configManager.getConfigFile().getString("archiveType"));
+
+        configManager.getChatlog().setPrefix(StringEscapeUtils.unescapeJava(ChatColor.translateAlternateColorCodes('&', configManager.getConfigFile().getString("prefix"))));
+        configManager.getChatlog().setLanguage(Language.valueOf(configManager.getConfigFile().getString("language")));
     }
 
-    public boolean isSettingsValid() {
-        return settingsValid;
+    public String getHostname() {
+        return hostname;
     }
 
-    private void retrieveConfigSettings() {
-        this.websiteURL = config.getString("websiteURL");
-        this.serverName = config.getString("serverName");
-        this.logKeyLength = config.getInt("logKeyLength");
-        this.language = config.getString("language");
-        this.isGamemodus = config.getBoolean("gamemodus");
-
-        String configPrefix = Chatlog.getInstance().getConfig().getString("prefix");
-        Chatlog.prefix = configPrefix;
-        Chatlog.prefix = ChatColor.translateAlternateColorCodes('&', configPrefix);
+    public String getDatabase() {
+        return database;
     }
 
-    private void checkValues() {
-        boolean valid = true;
-        ArrayList<String> invalidValues = new ArrayList<>();
-        if (!websiteURL.endsWith("/")) {
-            this.websiteURL += "/";
-        }
-        if (!(logKeyLength >= 6 && logKeyLength <= 255)) {
-            valid = false;
-            invalidValues.add("logKeyLength");
-        }
-        if (!valid) {
-            for (String value : invalidValues) {
-                System.err.println("Invalid config value given: " + value);
-            }
-        }
-        invalidValues.clear();
-        this.settingsValid = valid;
+    public String getUsername() {
+        return username;
     }
 
-    public boolean isGamemodus() {
-        return isGamemodus;
+    public String getPassword() {
+        return password;
     }
 
-    public FileConfiguration getConfig() {
-        return config;
+    public int getPort() {
+        return port;
     }
 
-    public String getWebsiteURL() {
-        return websiteURL;
+    public int getParameterLength() {
+        return parameterLength;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
     }
 
     public String getServerName() {
         return serverName;
     }
 
-    public int getLogKeyLength() {
-        return logKeyLength;
-    }
-
-    public String getLanguage() {
-        return language;
+    public ArchiveType getArchiveType() {
+        return archiveType;
     }
 }

@@ -1,12 +1,2 @@
-Version 0.4.1:
-    - initial release
-
-Version 0.4.2:
-    - Link-Bug behoben (URL beinhaltete keinen GET-Paramenter)
-    - Nur Spieler, die /chatlog genutzt haben, erhalten die URL
-
-Version: 0.5.0:
-    - Sprachkonfiguration
-
-Version 0.5.1:
-    - Minecraft 1.9 kompatibel
+v. 1.0:
+  - Intial release

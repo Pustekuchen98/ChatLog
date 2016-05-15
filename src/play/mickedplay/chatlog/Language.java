@@ -1,13 +1,8 @@
 package play.mickedplay.chatlog;
 
 /**
- * Created by Privat on 25.02.2016 at 22:34.
+ * Created by mickedplay on 10.05.2016 at 21:25 UTC+1.
  */
 public enum Language {
-
-    REQ_CHATLOG_URL,
-    REQ_CHATLOG_AVAILABLE_SOON;
-
-    Language() {
-    }
+    ENGLISH, GERMAN, CUSTOM;
 }
