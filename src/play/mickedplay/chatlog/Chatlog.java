@@ -1,6 +1,7 @@
 package play.mickedplay.chatlog;
 
 import play.mickedplay.chatlog.database.DatabaseManager;
+import play.mickedplay.chatlog.exception.ExceptionManager;
 import play.mickedplay.chatlog.player.PlayerManager;
 
 /**

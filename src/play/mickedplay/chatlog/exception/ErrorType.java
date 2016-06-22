@@ -9,7 +9,6 @@ public enum ErrorType {
     DATABASE_UPDATE("Erforderliche Datensätze konnten nicht in der Datenbank gespeichert werden."),
     DATABASE_FETCH_RESULT("Ein Fehler ist beim Lesen von Datenbankdatensätzen aufgetreten.");
 
-
     private String description;
 
     ErrorType(String description) {

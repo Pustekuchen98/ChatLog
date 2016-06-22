@@ -1,7 +1,7 @@
 package play.mickedplay.chatlog.database;
 
 import play.mickedplay.chatlog.Chatlog;
-import play.mickedplay.chatlog.ExceptionManager;
+import play.mickedplay.chatlog.exception.ExceptionManager;
 import play.mickedplay.chatlog.exception.ErrorType;
 
 import java.sql.*;

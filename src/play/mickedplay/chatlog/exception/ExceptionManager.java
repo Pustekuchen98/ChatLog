@@ -1,6 +1,7 @@
-package play.mickedplay.chatlog;
+package play.mickedplay.chatlog.exception;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import play.mickedplay.chatlog.Chatlog;
 import play.mickedplay.chatlog.exception.ErrorType;
 
 import java.io.File;
