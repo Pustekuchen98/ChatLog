@@ -1,2 +1,5 @@
 v. 1.0:
-  - Intial release
+  - Initial release
+
+v. 1.0.1:
+  - Minecraft 1.10 compatible
