@@ -3,7 +3,8 @@ package play.mickedplay.chatlog;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
- * Created by mickedplay on 10.05.2016 at 21:15 UTC+1.
+ * Created by mickedplay on 10.05.2016 at 21:15 CEST.
+ * You are not allowed to remove this comment.
  */
 public class ConfigManager {
 

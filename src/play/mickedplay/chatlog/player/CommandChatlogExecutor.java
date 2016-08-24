@@ -6,7 +6,8 @@ import org.bukkit.command.CommandSender;
 import play.mickedplay.chatlog.Chatlog;
 
 /**
- * Created by mickedplay on 15.05.2016 at 13:40 UTC+1.
+ * Created by mickedplay on 15.05.2016 at 13:40 CEST.
+ * You are not allowed to remove this comment.
  */
 public class CommandChatlogExecutor implements CommandExecutor {
 

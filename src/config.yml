@@ -13,4 +13,3 @@ serverName: A Minecraft Server
 prefix: '&6Chatlog &7\u00BB &e'
 
 language: 'ENGLISH' # Not implemented yet
-mergeInterval: 0    # Not implemented yet

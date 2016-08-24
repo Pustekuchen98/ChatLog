@@ -13,7 +13,8 @@ import play.mickedplay.chatlog.message.MessageType;
 import play.mickedplay.chatlog.player.CommandChatlogExecutor;
 
 /**
- * Created by mickedplay on 10.05.2016 at 21:12 UTC+1.
+ * Created by mickedplay on 10.05.2016 at 21:12 CEST.
+ * You are not allowed to remove this comment.
  */
 public class CLPlugin extends JavaPlugin implements Listener {
 
@@ -21,6 +22,11 @@ public class CLPlugin extends JavaPlugin implements Listener {
 
     public void onEnable() {
         this.chatlog = new Chatlog(this);
+        if(!this.chatlog.isEnabled()){
+            getLogger().severe("No database connection available. Please check your connection details.");
+            Bukkit.getPluginManager().disablePlugin(chatlog.getPlugin());
+            return;
+        }
         Bukkit.getPluginManager().registerEvents(this, this);
         new CommandChatlogExecutor(this.chatlog);
         Bukkit.getOnlinePlayers().forEach(player -> this.chatlog.getPlayerManager().addCLPlayer(player));

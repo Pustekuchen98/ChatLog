@@ -7,7 +7,8 @@ import play.mickedplay.chatlog.message.MessageType;
 import java.util.UUID;
 
 /**
- * Created by mickedplay on 10.05.2016 at 21:30 UTC+1.
+ * Created by mickedplay on 10.05.2016 at 21:30 CEST.
+ * You are not allowed to remove this comment.
  */
 public class CLPlayer {
 

@@ -5,7 +5,8 @@ import org.bukkit.ChatColor;
 import play.mickedplay.chatlog.database.ArchiveType;
 
 /**
- * Created by Privat on 05.02.2016 at 22:20.
+ * Created by mickedplay on 05.02.2016 at 22:20 CEST.
+ * You are not allowed to remove this comment.
  */
 public class ConfigSettings {
 

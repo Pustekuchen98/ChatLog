@@ -6,7 +6,8 @@ import play.mickedplay.chatlog.Chatlog;
 import java.util.HashMap;
 
 /**
- * Created by mickedplay on 10.05.2016 at 21:28 UTC+1.
+ * Created by mickedplay on 10.05.2016 at 21:28 CEST.
+ * You are not allowed to remove this comment.
  */
 public class PlayerManager {
 

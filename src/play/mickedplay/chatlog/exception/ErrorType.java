@@ -1,7 +1,8 @@
 package play.mickedplay.chatlog.exception;
 
 /**
- * Created by mickedplay on 13.05.2016 at 20:09 UTC+1.
+ * Created by mickedplay on 13.05.2016 at 20:09 CEST.
+ * You are not allowed to remove this comment.
  */
 public enum ErrorType {
 

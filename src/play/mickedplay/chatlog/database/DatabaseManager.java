@@ -10,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by mickedplay on 10.05.2016 at 21:43 UTC+1.
+ * Created by mickedplay on 10.05.2016 at 21:43 CEST.
+ * You are not allowed to remove this comment.
  */
 public class DatabaseManager {
 
@@ -24,9 +25,8 @@ public class DatabaseManager {
         this.chatlog = chatlog;
         this.configManager = chatlog.getConfigManager();
         this.mySQLManager = new MySQLManager(this);
-        if (mySQLManager.isConnectionAvailable()) {
-            this.prepare();
-        }
+        if (mySQLManager.isConnectionAvailable()) this.prepare();
+        else chatlog.setEnabled(false);
     }
 
     public Chatlog getChatlog() {

@@ -1,14 +1,15 @@
 package play.mickedplay.chatlog.database;
 
 import play.mickedplay.chatlog.Chatlog;
-import play.mickedplay.chatlog.exception.ExceptionManager;
 import play.mickedplay.chatlog.exception.ErrorType;
+import play.mickedplay.chatlog.exception.ExceptionManager;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
 /**
- * Created by mickedplay on 10.05.2016 at 21:44 UTC+1.
+ * Created by mickedplay on 10.05.2016 at 21:44 CEST.
+ * You are not allowed to remove this comment.
  */
 public class MySQLManager {
 
@@ -26,9 +27,7 @@ public class MySQLManager {
         this.exceptionManager = databaseManager.getChatlog().getExceptionManager();
         this.openConnection();
         this.createRequiredTables();
-        if (databaseManager.getChatlog().getSettings().getArchiveType() == ArchiveType.MERGED) {
-            this.fetchLastRecordDay();
-        }
+        if (databaseManager.getChatlog().getSettings().getArchiveType() == ArchiveType.MERGED) this.fetchLastRecordDay();
     }
 
     public boolean isConnectionAvailable() {
@@ -74,9 +73,7 @@ public class MySQLManager {
         if (this.connectionAvailable) {
             try {
                 ResultSet resultSet = this.query("SELECT lastRecordDay FROM cl_content");
-                while (resultSet.next()) {
-                    this.lastRecordDay = new SimpleDateFormat(resultSet.getString("lastRecordDay"));
-                }
+                while (resultSet.next()) this.lastRecordDay = new SimpleDateFormat(resultSet.getString("lastRecordDay"));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -86,7 +83,6 @@ public class MySQLManager {
     private void createRequiredTables() {
         if (this.connectionAvailable) {
             this.update("CREATE TABLE IF NOT EXISTS cl_content(id INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,urlKey VARCHAR(64),serverName VARCHAR(255),logComplete BOOLEAN,serverStart BIGINT(13),serverStop BIGINT(13))");
-//            this.query("");
         }
     }
 }

@@ -5,7 +5,8 @@ import play.mickedplay.chatlog.Helper;
 import java.util.UUID;
 
 /**
- * Created by mickedplay on 13.05.2016 at 21:41 UTC+1.
+ * Created by mickedplay on 13.05.2016 at 21:41 CEST.
+ * You are not allowed to remove this comment.
  */
 public class ChatMessage {
 

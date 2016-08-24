@@ -5,7 +5,8 @@ import play.mickedplay.chatlog.exception.ExceptionManager;
 import play.mickedplay.chatlog.player.PlayerManager;
 
 /**
- * Created by mickedplay on 10.05.2016 at 21:14 UTC+1.
+ * Created by mickedplay on 10.05.2016 at 21:14 CEST.
+ * You are not allowed to remove this comment.
  */
 public class Chatlog {
 
@@ -17,6 +18,8 @@ public class Chatlog {
 
     private String prefix;
     private Language language;
+
+    private boolean enabled = true;
 
     public Chatlog(CLPlugin clPlugin) {
         this.clPlugin = clPlugin;
@@ -64,5 +67,13 @@ public class Chatlog {
 
     public ConfigSettings getSettings() {
         return configManager.getSettings();
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 }

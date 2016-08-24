@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mickedplay on 13.05.2016 at 21:14 UTC+1.
+ * Created by mickedplay on 13.05.2016 at 21:14 CEST.
+ * You are not allowed to remove this comment.
  */
 public class MessageHandler {
 
@@ -27,15 +28,11 @@ public class MessageHandler {
      * Handles new ChatMessage objects
      */
     public void addChatMessage(String message, boolean cancelled, MessageType messageType) {
+        message = message.replace("'", "\\'");
         ArchiveType archiveType = this.clPlayer.getChatlog().getSettings().getArchiveType();
         ChatMessage chatMessage = new ChatMessage(this.clPlayer.getUuid(), message, cancelled, messageType);
-        if (archiveType == ArchiveType.INSTANT) {
-            this.chatlog.getDatabaseManager().saveChatMessage(chatMessage);
-        } else if (archiveType == ArchiveType.ONSTOP) {
-            this.chatMessages.add(chatMessage);
-        } else if (archiveType == ArchiveType.MERGED) {
-
-        }
+        if (archiveType == ArchiveType.INSTANT) this.chatlog.getDatabaseManager().saveChatMessage(chatMessage);
+        else if (archiveType == ArchiveType.ONSTOP) this.chatMessages.add(chatMessage);
     }
 
     public List<ChatMessage> getChatMessages() {

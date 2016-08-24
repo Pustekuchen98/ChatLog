@@ -3,3 +3,8 @@ v. 1.0:
 
 v. 1.0.1:
   - Minecraft 1.10 compatible
+
+v. 1.0.2
+  - Minecraft 1.10.2 compatible
+  - Bug fixes
+  - Improvements
