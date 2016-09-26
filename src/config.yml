@@ -1,15 +1,17 @@
 MySQL:
-  hostname:
-  port:
-  database:
-  username:
-  password:
-
-archiveType: 'INSTANT' # INSTANT, ONSTOP
+  hostname: 'hostname'
+  port: 3306
+  database: 'database'
+  username: 'username'
+  password: 'password'
+# Save modes: 'INSTANT' or 'ONSTOP'
+archiveType: 'INSTANT'
+# Use a number between 0 and 64
 parameterLength: 8
 baseUrl: http://example.com/
-serverName: A Minecraft Server
-
+server: A Minecraft Server
 prefix: '&6Chatlog &7\u00BB &e'
-
-language: 'ENGLISH' # Not implemented yet
+# Language system isn't implemented yet
+language: 'ENGLISH'
+# UUID's are comma separated like: '252d7ed9-8597-41fe-bc53-1ca6b25e5058;252d7ed9-8597-41fe-bc53-1ca6b25e5058'
+blacklist: ''

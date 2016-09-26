@@ -8,7 +8,7 @@ import java.util.Random;
  * Created by mickedplay on 13.05.2016 at 22:07 CEST.
  * You are not allowed to remove this comment.
  */
-public class Helper {
+public class Utilities {
 
     private final static String[] charArray = "abcdefghijklmnopqrstuvwxyz0123456789".split("");
 

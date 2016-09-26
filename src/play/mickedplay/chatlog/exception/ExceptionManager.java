@@ -32,6 +32,12 @@ public class ExceptionManager {
         if (!exceptionDirectory.exists()) exceptionDirectory.mkdirs();
     }
 
+    /**
+     * Stores an exception in a directory
+     *
+     * @param exception The exception
+     * @param errorType The errorType
+     */
     public void create(Exception exception, ErrorType errorType) {
         this.stackTraceList.add(ExceptionUtils.getStackTrace(exception));
         try {
@@ -42,6 +48,7 @@ public class ExceptionManager {
                 this.stackTraceList.clear();
                 this.chatlog.getPlugin().getLogger().severe("AN ERROR HAS OCCURED! For more details see " + absoluteFilePath);
             } else {
+                exception.printStackTrace();
                 this.chatlog.getPlugin().getLogger().severe("FAILED TO CREATE EXCEPTION FILE! PLEASE CHECK DIRECTORY WRITE PERMISSIONS!");
             }
         } catch (IOException ioException) {

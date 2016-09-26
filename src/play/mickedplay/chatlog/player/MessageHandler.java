@@ -25,12 +25,15 @@ public class MessageHandler {
     }
 
     /**
-     * Handles new ChatMessage objects
+     * Creates and handles a new ChatMessage object
+     *
+     * @param message     The message (written by a player)
+     * @param messageType The message type
      */
-    public void addChatMessage(String message, boolean cancelled, MessageType messageType) {
+    public void addChatMessage(String message, MessageType messageType) {
         message = message.replace("'", "\\'");
         ArchiveType archiveType = this.clPlayer.getChatlog().getSettings().getArchiveType();
-        ChatMessage chatMessage = new ChatMessage(this.clPlayer.getUuid(), message, cancelled, messageType);
+        ChatMessage chatMessage = new ChatMessage(this.chatlog, this.clPlayer.getUuid(), message, messageType);
         if (archiveType == ArchiveType.INSTANT) this.chatlog.getDatabaseManager().saveChatMessage(chatMessage);
         else if (archiveType == ArchiveType.ONSTOP) this.chatMessages.add(chatMessage);
     }

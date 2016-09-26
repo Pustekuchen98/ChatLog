@@ -1,11 +1,9 @@
 package play.mickedplay.chatlog.database;
 
-import play.mickedplay.chatlog.Chatlog;
 import play.mickedplay.chatlog.exception.ErrorType;
 import play.mickedplay.chatlog.exception.ExceptionManager;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by mickedplay on 10.05.2016 at 21:44 CEST.
@@ -13,27 +11,25 @@ import java.text.SimpleDateFormat;
  */
 public class MySQLManager {
 
-    private Chatlog chatlog;
     private DatabaseManager databaseManager;
     private ExceptionManager exceptionManager;
     private Connection connection;
     private boolean connectionAvailable;
 
-    private SimpleDateFormat lastRecordDay;
-
     public MySQLManager(DatabaseManager databaseManager) {
-        this.chatlog = databaseManager.getChatlog();
         this.databaseManager = databaseManager;
         this.exceptionManager = databaseManager.getChatlog().getExceptionManager();
         this.openConnection();
         this.createRequiredTables();
-        if (databaseManager.getChatlog().getSettings().getArchiveType() == ArchiveType.MERGED) this.fetchLastRecordDay();
     }
 
     public boolean isConnectionAvailable() {
         return connectionAvailable;
     }
 
+    /**
+     * Opens a connection to a database
+     */
     private void openConnection() {
         try {
             int port = this.databaseManager.getChatlog().getSettings().getPort();
@@ -48,6 +44,11 @@ public class MySQLManager {
         }
     }
 
+    /**
+     * Executes a mysql command
+     *
+     * @param query The query
+     */
     public void update(String query) {
         try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
@@ -59,6 +60,12 @@ public class MySQLManager {
         }
     }
 
+    /**
+     * Returns a ResultSet which was requested with the given query
+     *
+     * @param query The query
+     * @return A ResultSet which contains the requested data
+     */
     public ResultSet query(String query) {
         try {
             return this.connection.prepareStatement(query).executeQuery(query);
@@ -69,20 +76,12 @@ public class MySQLManager {
         return null;
     }
 
-    private void fetchLastRecordDay() {
-        if (this.connectionAvailable) {
-            try {
-                ResultSet resultSet = this.query("SELECT lastRecordDay FROM cl_content");
-                while (resultSet.next()) this.lastRecordDay = new SimpleDateFormat(resultSet.getString("lastRecordDay"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
+    /**
+     * Creates the main database table
+     */
     private void createRequiredTables() {
         if (this.connectionAvailable) {
-            this.update("CREATE TABLE IF NOT EXISTS cl_content(id INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,urlKey VARCHAR(64),serverName VARCHAR(255),logComplete BOOLEAN,serverStart BIGINT(13),serverStop BIGINT(13))");
+            this.update("CREATE TABLE IF NOT EXISTS _storage(id INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,reference VARCHAR(64),server VARCHAR(255),completed BOOLEAN,start BIGINT(13),stop BIGINT(13))");
         }
     }
 }

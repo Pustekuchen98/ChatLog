@@ -1,6 +1,7 @@
 package play.mickedplay.chatlog.message;
 
-import play.mickedplay.chatlog.Helper;
+import play.mickedplay.chatlog.Chatlog;
+import play.mickedplay.chatlog.Utilities;
 
 import java.util.UUID;
 
@@ -12,35 +13,35 @@ public class ChatMessage {
 
     private UUID uuid;
     private String message;
-    private boolean cancelled;
+    private boolean hidden;
     private MessageType messageType;
     private String time;
 
-    public ChatMessage(UUID uuid, String message, boolean cancelled, MessageType messageType) {
+    public ChatMessage(Chatlog chatlog, UUID uuid, String message, MessageType messageType) {
         this.uuid = uuid;
         this.message = message;
-        this.cancelled = cancelled;
         this.messageType = messageType;
-        this.time = Helper.getCurrentDateTime();
+        this.hidden = chatlog.getSettings().getBlacklist().contains(uuid.toString());
+        this.time = Utilities.getCurrentDateTime();
     }
 
     public UUID getUuid() {
         return uuid;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public boolean isCancelled() {
-        return cancelled;
+    public String getTime() {
+        return time;
     }
 
     public MessageType getMessageType() {
         return messageType;
     }
 
-    public String getTime() {
-        return time;
+    public String getMessage() {
+        return message;
+    }
+
+    public boolean isHidden() {
+        return hidden;
     }
 }

@@ -20,7 +20,9 @@ public class PlayerManager {
     }
 
     /**
-     * Registeres new CLPlayer object
+     * Registeres a new player
+     *
+     * @param player Player object
      */
     public void addCLPlayer(Player player) {
         if (!this.clPlayers.containsKey(player)) {

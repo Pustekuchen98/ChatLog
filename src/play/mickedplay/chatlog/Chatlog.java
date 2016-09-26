@@ -57,10 +57,6 @@ public class Chatlog {
         this.prefix = prefix;
     }
 
-    public Language getLanguage() {
-        return language;
-    }
-
     public void setLanguage(Language language) {
         this.language = language;
     }

@@ -2,7 +2,7 @@ package play.mickedplay.chatlog.database;
 
 import play.mickedplay.chatlog.Chatlog;
 import play.mickedplay.chatlog.ConfigManager;
-import play.mickedplay.chatlog.Helper;
+import play.mickedplay.chatlog.Utilities;
 import play.mickedplay.chatlog.exception.ErrorType;
 import play.mickedplay.chatlog.message.ChatMessage;
 
@@ -19,7 +19,7 @@ public class DatabaseManager {
     private MySQLManager mySQLManager;
     private ConfigManager configManager;
 
-    private String urlKey, serverName, serverStart;
+    private String reference, server, start;
 
     public DatabaseManager(Chatlog chatlog) {
         this.chatlog = chatlog;
@@ -37,25 +37,25 @@ public class DatabaseManager {
         return mySQLManager.isConnectionAvailable();
     }
 
-    public String getUrlKey() {
-        return urlKey;
+    public String getReference() {
+        return reference;
     }
 
     public void prepare() {
-        this.urlKey = Helper.generateUrlKey(this, this.configManager.getSettings().getParameterLength());
-        this.serverName = this.configManager.getSettings().getServerName();
-        this.serverStart = Helper.getCurrentDateTime();
-        this.mySQLManager.update("INSERT INTO cl_content (urlKey,serverName,logComplete,serverStart)VALUES('" + this.urlKey + "','" + this.serverName + "',false,'" + this.serverStart + "')");
-        this.mySQLManager.update("CREATE TABLE IF NOT EXISTS log_" + this.urlKey + "(id INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,message VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,uuid VARCHAR(36),type VARCHAR(32),time BIGINT(13))");
+        this.reference = Utilities.generateUrlKey(this, this.configManager.getSettings().getParameterLength());
+        this.server = this.configManager.getSettings().getServer();
+        this.start = Utilities.getCurrentDateTime();
+        this.mySQLManager.update("INSERT INTO _storage(reference,server,completed,start)VALUES('" + this.reference + "','" + this.server + "',false,'" + this.start + "')");
+        this.mySQLManager.update("CREATE TABLE IF NOT EXISTS " + this.reference + "(id INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,uuid VARCHAR(36),tstamp BIGINT(13),category VARCHAR(32),message VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,hidden BOOLEAN)");
     }
 
     /**
-     * Checks if a urlKey already exists
+     * Checks if a reference already exists
      */
     public boolean checkForExistingUrlKey(String urlKey) {
         try {
-            ResultSet resultSet = this.mySQLManager.query("SELECT urlKey FROM cl_content WHERE urlKey='" + urlKey + "'");
-            return resultSet.next() && resultSet.getString("urlKey") != null;
+            ResultSet resultSet = this.mySQLManager.query("SELECT reference FROM _storage WHERE reference='" + urlKey + "'");
+            return resultSet.next() && resultSet.getString("reference") != null;
         } catch (SQLException sqlException) {
             this.chatlog.getExceptionManager().create(sqlException, ErrorType.DATABASE_FETCH_RESULT);
         }
@@ -78,22 +78,22 @@ public class DatabaseManager {
                 break;
             default:
         }
-        this.mySQLManager.update("UPDATE cl_content SET logComplete = true, serverStop = '" + Helper.getCurrentDateTime() + "' WHERE urlKey = '" + this.urlKey + "'");
+        this.mySQLManager.update("UPDATE _storage SET completed=true,stop='" + Utilities.getCurrentDateTime() + "' WHERE reference='" + this.reference + "'");
     }
 
     /**
      * Removes empty table informations
      */
     private void removeTableData() {
-        this.mySQLManager.update("DROP TABLE log_" + this.urlKey);
-        this.mySQLManager.update("DELETE FROM cl_content WHERE urlKey='" + this.urlKey + "'");
+        this.mySQLManager.update("DROP TABLE " + this.reference);
+        this.mySQLManager.update("DELETE FROM _storage WHERE reference='" + this.reference + "'");
     }
 
     /**
      * Stores a given chatmessage object to database
      */
     public void saveChatMessage(ChatMessage chatMessage) {
-        this.mySQLManager.update("INSERT INTO log_" + this.urlKey + "(message,uuid,type,time)VALUES('" + chatMessage.getMessage() + "','" + chatMessage.getUuid().toString() + "','" + chatMessage.getMessageType().toString() + "','" + chatMessage.getTime() + "')");
+        this.mySQLManager.update("INSERT INTO " + this.reference + "(uuid,tstamp,category,message,hidden)VALUES('" + chatMessage.getUuid().toString() + "','" + chatMessage.getTime() + "','" + chatMessage.getMessageType().toString() + "','" + chatMessage.getMessage() + "'," + chatMessage.isHidden() + ")");
     }
 
     /**
@@ -101,7 +101,7 @@ public class DatabaseManager {
      */
     private boolean checkForEmptyTable() {
         try {
-            while (this.mySQLManager.query("SELECT * FROM log_" + this.urlKey).next()) {
+            while (this.mySQLManager.query("SELECT * FROM " + this.reference).next()) {
                 return false;
             }
         } catch (SQLException sqlException) {

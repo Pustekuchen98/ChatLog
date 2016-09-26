@@ -1,7 +1,7 @@
 main: play.mickedplay.chatlog.CLPlugin
 name: Chatlog
 author: mickedplay
-version: 1.0.2
+version: 2.0.0
 commands:
   chatlog:
     description: Chatlog

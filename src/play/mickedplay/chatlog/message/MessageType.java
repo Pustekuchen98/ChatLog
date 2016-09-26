@@ -5,5 +5,5 @@ package play.mickedplay.chatlog.message;
  * You are not allowed to remove this comment.
  */
 public enum MessageType {
-    SUCCESSFUL, COMMAND, CANCELLED;
+    SUCCESSFUL, COMMAND, CANCELLED
 }

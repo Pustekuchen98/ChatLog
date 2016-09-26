@@ -14,6 +14,13 @@ import play.mickedplay.chatlog.player.CommandChatlogExecutor;
 
 /**
  * Created by mickedplay on 10.05.2016 at 21:12 CEST.
+ * <p>
+ * <p>
+ * 2016 - Diese Version eines Chatlogs wurde von mickedplay geschrieben und ist urheberrechtlich durch geistiges Eigentum geschützt.
+ * (Vielen Dank an SpigotMC! - https://www.spigotmc.org/)
+ * Für weitere Informationen siehe https://www.spigotmc.org/resources/chatlog.18954/ oder http://mickedplay.de/
+ * <p>
+ * Du darfst diesen Kommentar nicht entfernen.
  * You are not allowed to remove this comment.
  */
 public class CLPlugin extends JavaPlugin implements Listener {
@@ -22,7 +29,7 @@ public class CLPlugin extends JavaPlugin implements Listener {
 
     public void onEnable() {
         this.chatlog = new Chatlog(this);
-        if(!this.chatlog.isEnabled()){
+        if (!this.chatlog.isEnabled()) {
             getLogger().severe("No database connection available. Please check your connection details.");
             Bukkit.getPluginManager().disablePlugin(chatlog.getPlugin());
             return;
@@ -52,11 +59,11 @@ public class CLPlugin extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void asyncPlayerChat(AsyncPlayerChatEvent e) {
-        this.chatlog.getPlayerManager().getCLPlayer(e.getPlayer()).addChatMessage(e.getMessage(), e.isCancelled(), !e.isCancelled() ? MessageType.SUCCESSFUL : MessageType.CANCELLED);
+        this.chatlog.getPlayerManager().getCLPlayer(e.getPlayer()).addChatMessage(e.getMessage(), !e.isCancelled() ? MessageType.SUCCESSFUL : MessageType.CANCELLED);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void commandPreprocess(PlayerCommandPreprocessEvent e) {
-        this.chatlog.getPlayerManager().getCLPlayer(e.getPlayer()).addChatMessage(e.getMessage(), e.isCancelled(), !e.isCancelled() ? MessageType.COMMAND : MessageType.CANCELLED);
+        this.chatlog.getPlayerManager().getCLPlayer(e.getPlayer()).addChatMessage(e.getMessage(), !e.isCancelled() ? MessageType.COMMAND : MessageType.CANCELLED);
     }
 }

@@ -26,16 +26,12 @@ public class CLPlayer {
         return chatlog;
     }
 
-    public void addChatMessage(String message, boolean cancelled, MessageType messageType) {
-        this.messageHandler.addChatMessage(message, cancelled, messageType);
+    public void addChatMessage(String message, MessageType messageType) {
+        this.messageHandler.addChatMessage(message, messageType);
     }
 
     public UUID getUuid() {
         return player.getUniqueId();
-    }
-
-    public void sendMessage(String message) {
-        this.player.sendMessage(message);
     }
 
     public MessageHandler getMessageHandler() {
