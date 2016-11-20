@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import play.mickedplay.chatlog.database.ArchiveType;
+import play.mickedplay.chatlog.lang.Language;
 import play.mickedplay.chatlog.message.MessageType;
 import play.mickedplay.chatlog.player.CommandChatlogExecutor;
 
@@ -36,6 +37,7 @@ public class CLPlugin extends JavaPlugin implements Listener {
         }
         Bukkit.getPluginManager().registerEvents(this, this);
         new CommandChatlogExecutor(this.chatlog);
+        new Language(this.chatlog.getConfigManager());
         Bukkit.getOnlinePlayers().forEach(player -> this.chatlog.getPlayerManager().addCLPlayer(player));
     }
 

@@ -25,9 +25,7 @@ public class PlayerManager {
      * @param player Player object
      */
     public void addCLPlayer(Player player) {
-        if (!this.clPlayers.containsKey(player)) {
-            this.clPlayers.put(player, new CLPlayer(this.chatlog, player));
-        }
+        if (!this.clPlayers.containsKey(player)) this.clPlayers.put(player, new CLPlayer(this.chatlog, player));
     }
 
     public CLPlayer getCLPlayer(Player player) {

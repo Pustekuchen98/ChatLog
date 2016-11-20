@@ -1,2 +1,6 @@
 v. 2.0.0:
   - Initial release
+
+v. 2.1.0:
+  - Compatible with Spigot 1.11
+  - Reimplemented language system

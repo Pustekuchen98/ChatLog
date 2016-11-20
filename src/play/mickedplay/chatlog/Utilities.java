@@ -21,4 +21,9 @@ public class Utilities {
         for (int i = 0; i < keyLength; i++) urlKey += charArray[new Random().nextInt(charArray.length)];
         return databaseManager.checkForExistingUrlKey(urlKey) ? generateUrlKey(databaseManager, keyLength) : urlKey.toLowerCase();
     }
+
+    public static String getServerFolder(Chatlog chatlog) {
+        String folderPath = chatlog.getPlugin().getServer().getWorldContainer().getAbsolutePath();
+        return folderPath.substring(0, folderPath.length() - 1);
+    }
 }

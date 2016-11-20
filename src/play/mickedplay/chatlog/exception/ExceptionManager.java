@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,15 +32,15 @@ public class ExceptionManager {
         this.exceptionDirectory = new File(chatlog.getPlugin().getDataFolder(), "exceptions");
         if (!exceptionDirectory.exists()) exceptionDirectory.mkdirs();
     }
-
     /**
+
      * Stores an exception in a directory
      *
      * @param exception The exception
      * @param errorType The errorType
      */
     public void create(Exception exception, ErrorType errorType) {
-        this.stackTraceList.add(ExceptionUtils.getStackTrace(exception));
+        this.stackTraceList.addAll(Arrays.asList(errorType.getDescription(), "", ExceptionUtils.getStackTrace(exception)));
         try {
             Date date = Calendar.getInstance().getTime();
             String absoluteFilePath = this.exceptionDirectory.getAbsolutePath() + "/Exception_" + new SimpleDateFormat("yyyy-MM-dd").format(date) + "_" + new SimpleDateFormat("HH-mm-hh").format(date) + ".txt";

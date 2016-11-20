@@ -11,7 +11,15 @@ parameterLength: 8
 baseUrl: http://example.com/
 server: A Minecraft Server
 prefix: '&6Chatlog &7\u00BB &e'
-# Language system isn't implemented yet
+# Language settings at the end of this file
 language: 'ENGLISH'
 # UUID's are comma separated like: '252d7ed9-8597-41fe-bc53-1ca6b25e5058;252d7ed9-8597-41fe-bc53-1ca6b25e5058'
 blacklist: ''
+
+# Language settings (unicodes allowed)
+# 'chatlogCommand': Chat message if auser types /chatlog
+lang:
+  ENGLISH:
+    chatlogCommand: '%PREFIX% Chatlog url: %BASE_URL%?log=&6%LOG_KEY%'
+  GERMAN:
+    chatlogCommand: '%PREFIX% Chatlog url: %BASE_URL%?log=&6%LOG_KEY%'

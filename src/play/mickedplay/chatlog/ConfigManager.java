@@ -9,14 +9,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class ConfigManager {
 
     private Chatlog chatlog;
-    private FileConfiguration configFile;
     private ConfigSettings configSettings;
 
     public ConfigManager(Chatlog chatlog) {
         this.chatlog = chatlog;
-        this.configFile = chatlog.getPlugin().getConfig();
         chatlog.getPlugin().getConfig().options().copyDefaults(true);
         chatlog.getPlugin().saveDefaultConfig();
+
         this.configSettings = new ConfigSettings(this);
     }
 
@@ -24,11 +23,11 @@ public class ConfigManager {
         return chatlog;
     }
 
-    public FileConfiguration getConfigFile() {
-        return configFile;
-    }
-
     public ConfigSettings getSettings() {
         return configSettings;
+    }
+
+    FileConfiguration getConfigFile() {
+        return this.chatlog.getPlugin().getConfig();
     }
 }

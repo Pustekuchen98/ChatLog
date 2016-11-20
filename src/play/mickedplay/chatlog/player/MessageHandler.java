@@ -34,8 +34,14 @@ public class MessageHandler {
         message = message.replace("'", "\\'");
         ArchiveType archiveType = this.clPlayer.getChatlog().getSettings().getArchiveType();
         ChatMessage chatMessage = new ChatMessage(this.chatlog, this.clPlayer.getUuid(), message, messageType);
-        if (archiveType == ArchiveType.INSTANT) this.chatlog.getDatabaseManager().saveChatMessage(chatMessage);
-        else if (archiveType == ArchiveType.ONSTOP) this.chatMessages.add(chatMessage);
+        switch (archiveType) {
+            case INSTANT:
+                this.chatlog.getDatabaseManager().saveChatMessage(chatMessage);
+                break;
+            case ONSTOP:
+                this.chatMessages.add(chatMessage);
+                break;
+        }
     }
 
     public List<ChatMessage> getChatMessages() {

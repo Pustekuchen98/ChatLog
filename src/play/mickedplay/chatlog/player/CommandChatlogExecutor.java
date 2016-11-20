@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import play.mickedplay.chatlog.Chatlog;
+import play.mickedplay.chatlog.lang.Language;
 
 /**
  * Created by mickedplay on 15.05.2016 at 13:40 CEST.
@@ -31,7 +32,7 @@ public class CommandChatlogExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("chatlog")) {
             if (args.length >= 0) {
-                commandSender.sendMessage(this.chatlog.getPrefix() + "Chatlog url: " + this.chatlog.getSettings().getBaseUrl() + "?log=" + this.chatlog.getDatabaseManager().getReference());
+                commandSender.sendMessage(Language.chatlogCommand);
                 return true;
             }
         }

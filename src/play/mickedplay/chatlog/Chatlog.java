@@ -17,7 +17,6 @@ public class Chatlog {
     private DatabaseManager databaseManager;
 
     private String prefix;
-    private Language language;
 
     private boolean enabled = true;
 
@@ -57,19 +56,15 @@ public class Chatlog {
         this.prefix = prefix;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public ConfigSettings getSettings() {
         return configManager.getSettings();
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

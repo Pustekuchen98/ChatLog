@@ -21,6 +21,7 @@ public class ConfigSettings {
     private List<String> blacklist;
 
     private ArchiveType archiveType;
+    private String langType;
 
     public ConfigSettings(ConfigManager configManager) {
         this.hostname = configManager.getConfigFile().getString("MySQL.hostname");
@@ -34,11 +35,11 @@ public class ConfigSettings {
         this.server = configManager.getConfigFile().getString("server");
 
         this.archiveType = ArchiveType.valueOf(configManager.getConfigFile().getString("archiveType"));
-
         this.blacklist = new ArrayList<>(Arrays.asList(configManager.getConfigFile().getString("blacklist").split(";")));
 
+        this.langType = configManager.getConfigFile().getString("language");
+
         configManager.getChatlog().setPrefix(StringEscapeUtils.unescapeJava(ChatColor.translateAlternateColorCodes('&', configManager.getConfigFile().getString("prefix"))));
-        configManager.getChatlog().setLanguage(Language.valueOf(configManager.getConfigFile().getString("language")));
     }
 
     public String getHostname() {
@@ -75,6 +76,10 @@ public class ConfigSettings {
 
     public ArchiveType getArchiveType() {
         return archiveType;
+    }
+
+    public String getLangType() {
+        return langType;
     }
 
     public List<String> getBlacklist() {

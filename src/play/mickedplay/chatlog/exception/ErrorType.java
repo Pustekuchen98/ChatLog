@@ -6,9 +6,12 @@ package play.mickedplay.chatlog.exception;
  */
 public enum ErrorType {
 
-    DATABASE_CANT_CONNECT("Eine Verbindung zur Datenbank ist fehlgeschlagen. Bitte überprüfe die Zugangsdaten auf ihre Richtigkeit."),
-    DATABASE_UPDATE("Erforderliche Datensätze konnten nicht in der Datenbank gespeichert werden."),
-    DATABASE_FETCH_RESULT("Ein Fehler ist beim Lesen von Datenbankdatensätzen aufgetreten.");
+    // @formatter:off
+    DATABASE_CANT_CONNECT("Connection to database failed. Please check your config settings."),
+    DATABASE_UPDATE("Failed to store informations in your database!"),
+    DATABASE_FETCH_RESULT("Failed to read database informations!"),
+    LANG_CONFIG_SAVE_FAILED("Failed to save language file!");
+    // @formatter:on
 
     private String description;
 
